@@ -11,6 +11,7 @@ $(document).ready(function(){
 
       if(keyWord.length > 0){
         drawArtist();
+        $('#submit').val('')
       }
     }
   })
