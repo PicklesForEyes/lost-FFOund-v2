@@ -98,3 +98,9 @@ $(document).ready(function(){
 
   testApi();
 })
+
+$(document).ready(function(){
+  $('#dump').slick({
+    
+  });
+});
