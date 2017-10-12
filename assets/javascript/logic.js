@@ -78,4 +78,23 @@ $(document).ready(function(){
       })
     })
   }
+
+  function testApi(){
+    var queryURL = 'http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
+
+    $.ajax({
+      url: queryURL,
+      method: 'GET'
+    }).done(function(res){
+      for(var i = 0; i < res.artists.artist.length; i++){
+        var trending = $('<div>');
+        var artistName = $('<p>');
+        artistName.text(res.artists.artist[i].name)
+          trending.append(artistName);
+        $('#dump').append(trending)
+      }
+    })
+  }
+
+  testApi();
 })
