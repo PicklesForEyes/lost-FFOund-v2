@@ -1,0 +1,43 @@
+body {
+    background-color: gray;
+    font-size: 16px;
+    line-height: 1.6;
+    width: 95%;
+    margin: 0 auto;
+}
+header {
+    background-color: orange;
+}
+#top-section {
+    background-color: blue;
+}
+#middle-section {
+    background-color: pink;
+}
+#bottom-section {
+    background-color: yellow;
+}
+footer {
+    background-color: black;
+    color: white;
+}
+#main-logo {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+}
+    nav> ul {
+        display: flex;
+    }
+    nav > ul > li {
+        padding: 5px;
+        margin: 0 5px;
+    }
+    li:hover {
+        background-color: turquoise;
+    }
+    #band-img {
+        background-color: gold;
+        width: 200px;
+        height: 200px;
+    }
