@@ -24,6 +24,7 @@ $(document).ready(function(){
   function drawArtist(){
 
     $('#events-table').empty();
+    $('#similar').empty();
     var lastURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
 
     var bandsURL = 'https://rest.bandsintown.com/artists/' + keyWord + '/events?app_id=lost&ffound';
