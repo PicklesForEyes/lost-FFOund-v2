@@ -1,4 +1,7 @@
 $(document).ready(function(){
+  
+
+
 
   var keyWord = '';
 
@@ -80,27 +83,36 @@ $(document).ready(function(){
   }
 
   function testApi(){
-    var queryURL = 'http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
+    var queryURL = 'http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
 
     $.ajax({
       url: queryURL,
       method: 'GET'
     }).done(function(res){
+  
       for(var i = 0; i < res.artists.artist.length; i++){
         var trending = $('<div>');
         var artistName = $('<p>');
-        artistName.text(res.artists.artist[i].name)
-          trending.append(artistName);
-        $('#dump').append(trending)
+        var artistImg = $('<img>');
+        // artistName.text(res.artists.artist[i].name)
+        //   trending.append(artistName);
+        artistImg.attr('src',res.artists.artist[i].image[4]['#text']);
+        // $('#dump').append(trending);
+        trending.append(artistImg);
+        $('#dump').append(trending);
       }
+            $('#dump').slick({
+    dots: true,
+    infinite: true,
+    speed: 700,
+    autoplay:true,
+    autoplaySpeed: 2000,
+    arrows:false,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  });
     })
   }
 
   testApi();
 })
-
-$(document).ready(function(){
-  $('#dump').slick({
-    
-  });
-});
