@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  console.log(moment().format())
+  // console.log(moment().format())
 
   var keyWord = '';
 
@@ -34,15 +34,16 @@ $(document).ready(function(){
     }).done(function(result){
       console.log(result);
 
-      var name = $('<h2>');
-      var bio = $('<p>');
-      var artist = $('<div class="artist">');
-      var image = $('<img>');
-        image.attr('src', result.artist.image[4]['#text'])
-        name.text(result.artist.name);
-        bio.html(result.artist.bio.summary);
-        artist.append(image, name, bio);
-      $('#content-dump').append(artist)
+      // var artist = $('<div class="artist">');
+      $('#band-name').text(result.artist.name);
+      $('#band-bio').html(result.artist.bio.summary)
+      $('#band-img').attr('src', result.artist.image[4]['#text'])
+      // var image = $('<img>');
+      //   image.attr('src', result.artist.image[4]['#text'])
+      //   name.text(result.artist.name);
+      //   bio.html(result.artist.bio.summary);
+      //   artist.append(image, name, bio);
+      // $('#content-dump').append(artist)
 
       for(var i = 0; i < result.artist.similar.artist.length; i++){
         var simName = $('<li class="sim-artist">');
