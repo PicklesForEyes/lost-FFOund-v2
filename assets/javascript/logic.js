@@ -24,7 +24,7 @@ $(document).ready(function(){
   })
 
   function drawArtist(){
-
+    console.log(keyWord);
     $('#events-table').empty();
     $('#similar').empty();
     var lastURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
@@ -91,28 +91,37 @@ $(document).ready(function(){
     }).done(function(res){
   
       for(var i = 0; i < res.artists.artist.length; i++){
-        var trending = $('<div>');
-        var artistName = $('<p>');
+        var trending = $('<div>')
         var artistImg = $('<img>');
-        // artistName.text(res.artists.artist[i].name)
-        //   trending.append(artistName);
+        var artistName = res.artists.artist[i].name
+        
         artistImg.attr('src',res.artists.artist[i].image[4]['#text']);
+        artistImg.addClass("trending")
+        artistImg.attr('data-name', artistName)
         // $('#dump').append(trending);
         trending.append(artistImg);
         $('#dump').append(trending);
       }
-            $('#dump').slick({
-    dots: true,
-    infinite: true,
-    speed: 700,
-    autoplay:true,
-    autoplaySpeed: 2000,
-    arrows:false,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    $('#dump').slick({
+      dots: true,
+      infinite: true,
+      speed: 700,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      arrows: true,
+      slidesToShow: 1,
+      slidesToScroll: 1
   });
     })
   }
 
   testApi();
+
+
+  // $(document).on('click','.trending', function() {
+  //   keyWord = $(this).attr('data-name');
+  //   window.location.href = 'bio.html';
+  //   console.log(keyWord);
+  //   drawArtist();
+  // })  
 })
