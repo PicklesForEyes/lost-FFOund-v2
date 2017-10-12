@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-  // console.log(moment().format())
-
   var keyWord = '';
 
   $(document).on('keydown', function(event){
@@ -36,16 +34,10 @@ $(document).ready(function(){
     }).done(function(result){
       console.log(result);
 
-      // var artist = $('<div class="artist">');
       $('#band-name').text(result.artist.name);
       $('#band-bio').html(result.artist.bio.summary)
       $('#band-img').attr('src', result.artist.image[4]['#text'])
-      // var image = $('<img>');
-      //   image.attr('src', result.artist.image[4]['#text'])
-      //   name.text(result.artist.name);
-      //   bio.html(result.artist.bio.summary);
-      //   artist.append(image, name, bio);
-      // $('#content-dump').append(artist)
+
 
       for(var i = 0; i < result.artist.similar.artist.length; i++){
         var simName = $('<li class="sim-artist">');
@@ -64,19 +56,7 @@ $(document).ready(function(){
         console.log(result);
         if(result.length > 5){
           for(var i = 0; i < 5; i++){
-            // console.log(result[i]);
-            // console.log(moment(result[i].datetime).format('MMM-Do-YYYY hh:ma'))
-            // var eventLink = $('<a class="ticket-link">');
-            //   eventLink.attr('href', result[i].offers[0].url);
-            // var event = $('<div class="event">');
-            // var venue = $('<p>');
-            // var location = $('<p>');
-            // var datetime = $('<p>' + moment(result[i].datetime).format('MMM Do, YYYY hh:mma') + '</p>')
-            //   venue.text(result[i].venue.name);
-            //   location.text(result[i].venue.city + result[i].venue.country);
-            // event.append(datetime, venue, location);
-            // eventLink.append(event)
-            // $('.artist').append(eventLink);
+
             $('#events-table').append(
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
@@ -86,19 +66,7 @@ $(document).ready(function(){
           }
         } else {
           for(var i = 0; i < result.length; i++){
-            // console.log(result[i]);
-            // console.log(moment(result[i].datetime).format('MMM-Do-YYYY hh:ma'))
-            // var eventLink = $('<a class="ticket-link">');
-            //   eventLink.attr('href', result[i].offers[0].url);
-            // var event = $('<div class="event">');
-            // var venue = $('<p>');
-            // var location = $('<p>');
-            // var datetime = $('<p>' + moment(result[i].datetime).format('MMM Do, YYYY hh:mma') + '</p>')
-            //   venue.text(result[i].venue.name);
-            //   location.text(result[i].venue.city + result[i].venue.country);
-            // event.append(datetime, venue, location);
-            // eventLink.append(event)
-            // $('.artist').append(eventLink);
+
             $('#events-table').append(
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
