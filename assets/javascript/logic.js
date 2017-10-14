@@ -146,11 +146,28 @@ $('.slick-slide').imagesLoaded(function() {
 
   scrollerApi();
 
+// Firebase stufffffff
 
-  // $(document).on('click','.trending', function() {
-  //   keyWord = $(this).attr('data-name');
-  //   window.location.href = 'bio.html';
-  //   console.log(keyWord);
-  //   drawArtist();
-  // })
+  var config = {
+    apiKey: "AIzaSyDRpGzVh43wHxEAiH-I6commqUWlJe_Cb8",
+    authDomain: "lostnfffound.firebaseapp.com",
+    databaseURL: "https://lostnfffound.firebaseio.com",
+    projectId: "lostnfffound",
+    storageBucket: "lostnfffound.appspot.com",
+    messagingSenderId: "375907715461"
+  };
+
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+  var firstName = $("#firstname").val().trim();
+  var lastName = $("#lastname").val().trim();
+  var comment = $("#subject").val().trim();
+
+  $("#contact-form-button").on('click', function (){
+    event.preventDefault();
+  })
+
+
 })
