@@ -92,7 +92,7 @@ $('.slick-slide').imagesLoaded(function() {
             $('#events-table').append(
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
-              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.country + 
+              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country + 
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
@@ -102,7 +102,7 @@ $('.slick-slide').imagesLoaded(function() {
             $('#events-table').append(
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
-              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.country + 
+              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country + 
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
@@ -125,9 +125,6 @@ $('.slick-slide').imagesLoaded(function() {
         var artistName = res.artists.artist[i].name
 
         artistImg.attr('src',res.artists.artist[i].image[4]['#text']);
-        artistImg.addClass("trending")
-        artistImg.attr('data-name', artistName)
-        // $('#dump').append(trending);
         trending.append(artistImg);
         $('#dump').append(trending);
       }
