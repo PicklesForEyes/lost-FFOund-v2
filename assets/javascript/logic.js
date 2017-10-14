@@ -167,7 +167,6 @@ $('.slick-slide').imagesLoaded(function() {
     var lastName = $("#lastname").val().trim();
     var comment = $("#subject").val().trim();
 
-
     database.ref().push({
       FirstName: firstName,
       LastName: lastName,
@@ -175,6 +174,14 @@ $('.slick-slide').imagesLoaded(function() {
 
     })
 
+
+  })
+  
+  var trashValue;
+
+  database.ref().on('value', function(snapshot){
+    trashValue = snapshot.numChildren();
+    $('#trashcan').text(trashValue);
   })
 
 
