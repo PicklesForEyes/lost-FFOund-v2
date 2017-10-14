@@ -132,12 +132,12 @@ $('.slick-slide').imagesLoaded(function() {
         $('#dump').append(trending);
       }
     $('#dump').slick({
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 700,
       autoplay: true,
       autoplaySpeed: 2000,
-      arrows: true,
+      arrows: false,
       slidesToShow: 1,
       slidesToScroll: 1
   });
@@ -161,12 +161,20 @@ $('.slick-slide').imagesLoaded(function() {
 
   var database = firebase.database();
 
-  var firstName = $("#firstname").val().trim();
-  var lastName = $("#lastname").val().trim();
-  var comment = $("#subject").val().trim();
-
   $("#contact-form-button").on('click', function (){
     event.preventDefault();
+    var firstName = $("#firstname").val().trim();
+    var lastName = $("#lastname").val().trim();
+    var comment = $("#subject").val().trim();
+
+
+    database.ref().push({
+      FirstName: firstName,
+      LastName: lastName,
+      CommentBody: comment
+
+    })
+
   })
 
 
