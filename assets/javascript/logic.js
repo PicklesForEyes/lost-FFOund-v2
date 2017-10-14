@@ -68,6 +68,7 @@ $('.slick-slide').imagesLoaded(function() {
       $('#band-name').text(result.artist.name);
       $('#band-bio').html(result.artist.bio.summary)
       $('#band-img').attr('src', result.artist.image[4]['#text'])
+      $('#band-img').css('visibility', 'visible');
 
 
       for(var i = 0; i < result.artist.similar.artist.length; i++){

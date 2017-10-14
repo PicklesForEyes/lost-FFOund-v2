@@ -141,4 +141,5 @@ footer {
     background-color: gold;
     width: 200px;
     height: 200px;
+    visibility: hidden;
 }
