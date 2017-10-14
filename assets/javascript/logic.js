@@ -111,7 +111,7 @@ $('.slick-slide').imagesLoaded(function() {
     })
   }
 
-  function testApi(){
+  function scrollerApi(){
     var queryURL = 'http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
 
     $.ajax({
@@ -144,7 +144,7 @@ $('.slick-slide').imagesLoaded(function() {
     })
   }
 
-  testApi();
+  scrollerApi();
 
 
   // $(document).on('click','.trending', function() {
