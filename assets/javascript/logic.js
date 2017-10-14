@@ -1,11 +1,18 @@
 $(document).ready(function(){
 
-$('#band-search-button').click(function() {
-  $('#dump').fadeOut();
-  $('#human-contact').fadeOut();
-  $('#animal-overlays').fadeOut();
-  $('#band-search').fadeIn();
-});
+function fadingOut () {
+    $('#dump').fadeOut();
+    $('#human-contact').fadeOut();
+    $('#animal-overlays').fadeOut();
+    $('#band-search').fadeIn();
+}
+
+
+
+  $('#band-search-button').click(function() {
+    fadingOut();
+  });
+
 $('#home').click(function() {
   $('#human-contact').fadeOut();
   $('#band-search').fadeOut();
@@ -29,10 +36,7 @@ $('.slick-slide').imagesLoaded(function() {
     if (event.which === 13){
       event.preventDefault();
       keyWord = $('.submit').val().trim();
-      $('#dump').fadeOut();
-      $('#human-contact').fadeOut();
-      $('#animal-overlays').fadeOut();
-      $('#band-search').fadeIn();
+      fadingOut();  
 
       if(keyWord.length > 0){
         drawArtist();
@@ -88,7 +92,7 @@ $('.slick-slide').imagesLoaded(function() {
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
               '</td><td>' + result[i].venue.city + ', ' + result[i].venue.country + 
-              '</td><td><a>' + result[i].offers[0].url + '</a></td></tr>'
+              '</td><td><a href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
         } else {
@@ -98,7 +102,7 @@ $('.slick-slide').imagesLoaded(function() {
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
               '</td><td>' + result[i].venue.city + ', ' + result[i].venue.country + 
-              '</td><td><a>' + result[i].offers[0].url + '</a></td></tr>'
+              '</td><td><a href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
         }
