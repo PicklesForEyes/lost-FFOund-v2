@@ -72,12 +72,19 @@ $('.slick-slide').imagesLoaded(function() {
 
 
       for(var i = 0; i < result.artist.similar.artist.length; i++){
-        var simName = $('<li class="sim-artist">');
-          var newName = result.artist.similar.artist[i].name;
+        var simName = $('<span class="sim-artist">');
+        var simImg = $('<img class="sim-img">');
+        var simDiv = $('<div class="sim-div">');
+          var newName = "          " + result.artist.similar.artist[i].name;
+          var newImg = result.artist.similar.artist[i].image[1]['#text'];
           simName.html(newName);
+          simImg.attr('src', newImg);
           simName.attr('data-name', newName);
+        simDiv.append(simImg);
+        simDiv.append(simName);
 
-        $('#similar').append(simName)
+        $('#similar').append(simDiv);
+        $('#similar').append('<br>');
 
       }
 
