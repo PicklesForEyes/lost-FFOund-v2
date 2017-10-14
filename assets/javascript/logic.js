@@ -28,11 +28,15 @@ $('.slick-slide').imagesLoaded(function() {
   $(document).on('keydown', function(event){
     if (event.which === 13){
       event.preventDefault();
-      keyWord = $('#submit').val().trim();
+      keyWord = $('.submit').val().trim();
+      $('#dump').fadeOut();
+      $('#human-contact').fadeOut();
+      $('#animal-overlays').fadeOut();
+      $('#band-search').fadeIn();
 
       if(keyWord.length > 0){
         drawArtist();
-        $('#submit').val('')
+        $('.submit').val('')
       }
     }
   })
