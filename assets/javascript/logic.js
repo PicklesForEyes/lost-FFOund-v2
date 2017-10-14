@@ -1,7 +1,27 @@
 $(document).ready(function(){
-  
 
+$('#band-search-button').click(function() {
+  $('#dump').fadeOut();
+  $('#human-contact').fadeOut();
+  $('#animal-overlays').fadeOut();
+  $('#band-search').fadeIn();
+});
+$('#home').click(function() {
+  $('#human-contact').fadeOut();
+  $('#band-search').fadeOut();
+  $('#animal-overlays').fadeIn();
+  $('#dump').fadeIn();
+});
+$('#contact-human').click(function() {
+  $('#band-search').fadeOut();
+  $('#animal-overlays').fadeOut();
+  $('#dump').fadeOut();
+  $('#human-contact').fadeIn();
+});
 
+$('.slick-slide').imagesLoaded(function() {
+  $('#footer').show();
+});
 
   var keyWord = '';
 
@@ -89,12 +109,12 @@ $(document).ready(function(){
       url: queryURL,
       method: 'GET'
     }).done(function(res){
-  
+
       for(var i = 0; i < res.artists.artist.length; i++){
         var trending = $('<div>')
         var artistImg = $('<img>');
         var artistName = res.artists.artist[i].name
-        
+
         artistImg.attr('src',res.artists.artist[i].image[4]['#text']);
         artistImg.addClass("trending")
         artistImg.attr('data-name', artistName)
@@ -123,5 +143,5 @@ $(document).ready(function(){
   //   window.location.href = 'bio.html';
   //   console.log(keyWord);
   //   drawArtist();
-  // })  
+  // })
 })
