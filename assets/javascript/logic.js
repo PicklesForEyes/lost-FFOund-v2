@@ -93,7 +93,7 @@ $('.slick-slide').imagesLoaded(function() {
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
               '</td><td>' + result[i].venue.city + ', ' + result[i].venue.country + 
-              '</td><td><a href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
+              '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
         } else {
@@ -103,7 +103,7 @@ $('.slick-slide').imagesLoaded(function() {
               '<tr><td>' + result[i].datetime + 
               '</td><td>' + result[i].venue.name + 
               '</td><td>' + result[i].venue.city + ', ' + result[i].venue.country + 
-              '</td><td><a href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
+              '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
         }
