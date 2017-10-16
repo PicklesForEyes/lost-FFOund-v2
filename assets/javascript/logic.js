@@ -55,7 +55,7 @@ $('.slick-slide').imagesLoaded(function() {
     console.log(keyWord);
     $('#events-table').empty();
     $('#similar').empty();
-    var lastURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
+    var lastURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
 
     var bandsURL = 'https://rest.bandsintown.com/artists/' + keyWord + '/events?app_id=lost&ffound';
 
@@ -119,7 +119,7 @@ $('.slick-slide').imagesLoaded(function() {
   }
 
   function scrollerApi(){
-    var queryURL = 'http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
+    var queryURL = 'https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
 
     $.ajax({
       url: queryURL,
