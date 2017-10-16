@@ -93,7 +93,10 @@ $('.slick-slide').imagesLoaded(function() {
         method: 'GET'
       }).done(function(result){
         console.log(result);
-        if(result.length > 5){
+        if (!result.length){
+          $('thead').css('visibility','hidden');
+          $('#events-table').append('<p>No upcoming events.</p>');
+        } else if(result.length > 5){
           for(var i = 0; i < 5; i++){
 
             $('#events-table').append(
