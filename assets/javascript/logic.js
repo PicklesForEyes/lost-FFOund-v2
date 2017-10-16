@@ -45,7 +45,7 @@ $('.slick-slide').imagesLoaded(function() {
     }
   })
 
-  $(document).on('click', '.sim-artist', function(event){
+  $(document).on('click', '.sim-div', function(event){
     event.preventDefault();
     keyWord = $(this).attr('data-name');
     drawArtist();
@@ -55,7 +55,7 @@ $('.slick-slide').imagesLoaded(function() {
     console.log(keyWord);
     $('#events-table').empty();
     $('#similar').empty();
-    var lastURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
+    var lastURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
 
     var bandsURL = 'https://rest.bandsintown.com/artists/' + keyWord + '/events?app_id=lost&ffound';
 
@@ -75,11 +75,11 @@ $('.slick-slide').imagesLoaded(function() {
         var simName = $('<span class="sim-artist">');
         var simImg = $('<img class="sim-img">');
         var simDiv = $('<div class="sim-div">');
-          var newName = "          " + result.artist.similar.artist[i].name;
+          var newName = result.artist.similar.artist[i].name;
           var newImg = result.artist.similar.artist[i].image[1]['#text'];
           simName.html(newName);
           simImg.attr('src', newImg);
-          simName.attr('data-name', newName);
+          simDiv.attr('data-name', newName);
         simDiv.append(simImg);
         simDiv.append(simName);
 
@@ -119,7 +119,7 @@ $('.slick-slide').imagesLoaded(function() {
   }
 
   function scrollerApi(){
-    var queryURL = 'http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
+    var queryURL = 'https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
 
     $.ajax({
       url: queryURL,
