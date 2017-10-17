@@ -109,8 +109,7 @@ $(document).on('click', '.sim-div', function(event){
         //limits table to 5 events
         else if(result.length > 5){
 
-          for(var i = 0; i < 5; i++){
-
+          for(var i = 0; i < result.length; i++){
             $('#events-table').append(
               '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') + 
               '</td><td>' + result[i].venue.name + 

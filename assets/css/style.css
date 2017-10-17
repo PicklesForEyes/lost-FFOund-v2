@@ -167,3 +167,10 @@ footer {
     height: 200px;
     visibility: hidden;
 }
+
+table {
+  height: 300px;
+  overflow-y: scroll;
+  display: block;
+  width: 600px;
+}
