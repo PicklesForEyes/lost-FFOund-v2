@@ -12,7 +12,9 @@ function fadingOut () {
     $('#band-search').fadeIn();
 }
   $('#band-search-button').click(function() {
-    fadingOut();
+    if($('#band-img').attr('src') !== '#'){
+      fadingOut();
+    }
   });
 
 $('#home').click(function() {
