@@ -1,14 +1,15 @@
 $(document).ready(function(){
 
+//Global Var
+var keyWord = '';
+
+// Page transitions
 function fadingOut () {
     $('#dump').fadeOut();
     $('#human-contact').fadeOut();
     $('#animal-overlays').fadeOut();
     $('#band-search').fadeIn();
 }
-
-
-
   $('#band-search-button').click(function() {
     fadingOut();
   });
@@ -30,47 +31,50 @@ $('.slick-slide').imagesLoaded(function() {
   $('#footer').show();
 });
 
-  var keyWord = '';
-
-  $(document).on('keydown', function(event){
-    if (event.which === 13){
-      event.preventDefault();
-      keyWord = $('.submit').val().trim();
-      fadingOut();  
-
-      if(keyWord.length > 0){
-        drawArtist();
-        $('.submit').val('')
-      }
-    }
-  })
-
-  $(document).on('click', '.sim-div', function(event){
+//Hitting Enter changes display and runs the search
+$(document).on('keydown', function(event){
+  if (event.which === 13){
     event.preventDefault();
-    keyWord = $(this).attr('data-name');
-    drawArtist();
-  })
+    keyWord = $('.submit').val().trim();
+      
+    if(keyWord.length > 0){
+      fadingOut();
+      drawArtist();
+      $('.submit').val('')
+    };
+  };
+});
 
+//Click function that opens new info when similar artist is clicked
+$(document).on('click', '.sim-div', function(event){
+  event.preventDefault();
+  keyWord = $(this).attr('data-name');
+  drawArtist();
+});
+
+// Function to hit both APIs that will pull info on bands
   function drawArtist(){
-    console.log(keyWord);
+    // console.log(keyWord);
     $('#events-table').empty();
     $('#similar').empty();
-    var lastURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
 
+    var lastURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
     var bandsURL = 'https://rest.bandsintown.com/artists/' + keyWord + '/events?app_id=lost&ffound';
 
+    //last.fm call
     $.ajax({
       url: lastURL,
       method: 'GET'
     }).done(function(result){
-      console.log(result);
+      // console.log(result);
 
+      // populate page with last.fm info
       $('#band-name').text(result.artist.name);
       $('#band-bio').html(result.artist.bio.summary)
       $('#band-img').attr('src', result.artist.image[4]['#text'])
       $('#band-img').css('visibility', 'visible');
 
-
+      //iterate over 5 most similar artists to create similar artist table
       for(var i = 0; i < result.artist.similar.artist.length; i++){
         var simName = $('<span class="sim-artist">');
         var simImg = $('<img class="sim-img">');
@@ -88,12 +92,22 @@ $('.slick-slide').imagesLoaded(function() {
 
       }
 
+      //Bandsintown call
       $.ajax({
         url: bandsURL,
         method: 'GET'
       }).done(function(result){
-        console.log(result);
+        // console.log(result);
+
+        //what happens when there are no upcoming events
+        if(!result.length) {
+          
+
+        }
+
+        //limits table to 5 events
         if(result.length > 5){
+
           for(var i = 0; i < 5; i++){
 
             $('#events-table').append(
@@ -103,7 +117,10 @@ $('.slick-slide').imagesLoaded(function() {
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
-        } else {
+        }
+
+        else {
+
           for(var i = 0; i < result.length; i++){
 
             $('#events-table').append(
@@ -116,8 +133,9 @@ $('.slick-slide').imagesLoaded(function() {
         }
       })
     })
-  }
+  };
 
+  // generates image for homepage image slideshow
   function scrollerApi(){
     var queryURL = 'https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
 
@@ -135,6 +153,8 @@ $('.slick-slide').imagesLoaded(function() {
         trending.append(artistImg);
         $('#dump').append(trending);
       }
+
+    //slick settings 
     $('#dump').slick({
       dots: false,
       infinite: true,
@@ -144,8 +164,9 @@ $('.slick-slide').imagesLoaded(function() {
       arrows: false,
       slidesToShow: 1,
       slidesToScroll: 1
-  });
-    })
+    });
+
+    });
   }
 
   scrollerApi();
