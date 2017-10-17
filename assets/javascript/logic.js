@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 //Global Var
 var keyWord = '';
+var trashValue;
 
 // Page transitions
 function fadingOut () {
@@ -171,6 +172,7 @@ $(document).on('click', '.sim-div', function(event){
 
   scrollerApi();
 
+
 // Firebase Initializations
   var config = {
     apiKey: "AIzaSyDRpGzVh43wHxEAiH-I6commqUWlJe_Cb8",
@@ -187,18 +189,54 @@ $(document).on('click', '.sim-div', function(event){
 
   $("#contact-form-button").on('click', function (){
     event.preventDefault();
-    var firstName = $("#firstname").val().trim();
-    var lastName = $("#lastname").val().trim();
-    var comment = $("#subject").val().trim();
+    var inputFirst = $('#firstname');
+    var inputLast = $('#lastname');
+    var inputSubject = $('#subject');
+    var firstName = inputFirst.val().trim();
+    var lastName = inputLast.val().trim();
+    var comment = inputSubject.val().trim();
 
-    database.ref().push({
-      FirstName: firstName,
-      LastName: lastName,
-      CommentBody: comment
-    });
+    if(firstName.length < 2){
+      inputFirst.addClass('error-show');
+      inputFirst.closest('div').children('.error').css('display','block');
+    }
+    else {
+      inputFirst.removeClass('error-show');
+    }
+
+    if(lastName.length < 2){
+      inputLast.addClass('error-show');
+      inputLast.closest('div').children('.error').css('display','block');
+    }
+    else {
+      inputLast.removeClass('error-show');
+    }
+
+    if(comment.length < 5 || comment.length > 160){
+      inputSubject.addClass('error-show');
+      inputSubject.closest('div').children('.error').css('display','block');
+    }
+    else {
+      inputSubject.removeClass('error-show');
+    }
+
+    console.log(inputFirst.closest().children())
+
+    if(!(inputFirst || inputLast || inputSubject).hasClass('error-show')) {
+      database.ref().push({
+        FirstName: firstName,
+        LastName: lastName,
+        CommentBody: comment
+      });
+
+      $('.error').css('display','none');
+
+      inputFirst.val('');
+      inputLast.val('');
+      inputSubject.val('')
+    }
+
   });
-  
-  var trashValue;
 
   database.ref().on('value', function(snapshot){
     trashValue = snapshot.numChildren();

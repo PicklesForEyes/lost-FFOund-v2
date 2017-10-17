@@ -174,3 +174,11 @@ table {
   display: block;
   width: 600px;
 }
+
+.error-show{
+  border: 2px solid red;
+}
+
+.error{
+  display: none;
+}
