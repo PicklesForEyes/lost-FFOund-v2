@@ -1,14 +1,15 @@
 $(document).ready(function(){
 
+//Global Var
+var keyWord = '';
+
+// Page transitions
 function fadingOut () {
     $('#dump').fadeOut();
     $('#human-contact').fadeOut();
     $('#animal-overlays').fadeOut();
     $('#band-search').fadeIn();
 }
-
-
-
   $('#band-search-button').click(function() {
     fadingOut();
   });
@@ -26,57 +27,63 @@ $('#contact-human').click(function() {
   $('#human-contact').fadeIn();
 });
 
-  var keyWord = '';
+$('.slick-slide').imagesLoaded(function() {
+  $('#footer').show();
+});
 
-  $(document).on('keydown', function(event){
-    if (event.which === 13){
-      event.preventDefault();
-      keyWord = $('.submit').val().trim();
-      $('#empty-bandsearch').css('display', 'none');
-      fadingOut();
-
-      if(keyWord.length > 0){
-        drawArtist();
-        $('.submit').val('')
-      }
-    }
-  })
-
-  $(document).on('click', '.sim-artist', function(event){
+//Hitting Enter changes display and runs the search
+$(document).on('keydown', function(event){
+  if (event.which === 13){
     event.preventDefault();
-    keyWord = $(this).attr('data-name');
-    drawArtist();
-  })
+    keyWord = $('.submit').val().trim();
 
+    if(keyWord.length > 0){
+      fadingOut();
+      drawArtist();
+      $('.submit').val('')
+    };
+  };
+});
+
+//Click function that opens new info when similar artist is clicked
+$(document).on('click', '.sim-div', function(event){
+  event.preventDefault();
+  keyWord = $(this).attr('data-name');
+  drawArtist();
+});
+
+// Function to hit both APIs that will pull info on bands
   function drawArtist(){
-    console.log(keyWord);
+    // console.log(keyWord);
     $('#events-table').empty();
     $('#similar').empty();
-    var lastURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
 
+    var lastURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&autocorrect=1&artist=' + keyWord + '&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json';
     var bandsURL = 'https://rest.bandsintown.com/artists/' + keyWord + '/events?app_id=lost&ffound';
 
+    //last.fm call
     $.ajax({
       url: lastURL,
       method: 'GET'
     }).done(function(result){
-      console.log(result);
+      // console.log(result);
 
+      // populate page with last.fm info
       $('#band-name').text(result.artist.name);
       $('#band-bio').html(result.artist.bio.summary)
       $('#band-img').attr('src', result.artist.image[4]['#text'])
       $('#band-img').css('visibility', 'visible');
 
-
+      //iterate over 5 most similar artists to create similar artist table
       for(var i = 0; i < result.artist.similar.artist.length; i++){
         var simName = $('<span class="sim-artist">');
         var simImg = $('<img class="sim-img">');
         var simDiv = $('<div class="sim-div">');
-          var newName = "          " + result.artist.similar.artist[i].name;
+          var newName = result.artist.similar.artist[i].name;
           var newImg = result.artist.similar.artist[i].image[1]['#text'];
           simName.html(newName);
           simImg.attr('src', newImg);
-          simName.attr('data-name', newName);
+          simDiv.attr('data-name', newName);
         simDiv.append(simImg);
         simDiv.append(simName);
 
@@ -85,14 +92,24 @@ $('#contact-human').click(function() {
 
       }
 
+      //Bandsintown call
       $.ajax({
         url: bandsURL,
         method: 'GET'
       }).done(function(result){
-        console.log(result);
-        if(result.length > 5){
-          for(var i = 0; i < 5; i++){
 
+        // console.log(result);
+
+        //what happens when there are no upcoming events
+        if(!result.length) {
+          $('thead').css('visibility','hidden');
+          $('#events-table').append('<p>No upcoming events.</p>')
+        }
+
+        //limits table to 5 events
+        else if(result.length > 5){
+
+          for(var i = 0; i < result.length; i++){
             $('#events-table').append(
               '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') +
               '</td><td>' + result[i].venue.name +
@@ -100,7 +117,10 @@ $('#contact-human').click(function() {
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
-        } else {
+        }
+
+        else {
+
           for(var i = 0; i < result.length; i++){
 
             $('#events-table').append(
@@ -113,10 +133,11 @@ $('#contact-human').click(function() {
         }
       })
     })
-  }
+  };
 
+  // generates image for homepage image slideshow
   function scrollerApi(){
-    var queryURL = 'http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
+    var queryURL = 'https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=97c0416057f9950af85f7d0fdd9991bd&format=json&limit=5';
 
     $.ajax({
       url: queryURL,
@@ -132,6 +153,8 @@ $('#contact-human').click(function() {
         trending.append(artistImg);
         $('#dump').append(trending);
       }
+
+    //slick settings
     $('#dump').slick({
       dots: false,
       infinite: true,
@@ -141,14 +164,14 @@ $('#contact-human').click(function() {
       arrows: false,
       slidesToShow: 1,
       slidesToScroll: 1
-  });
-    })
-  }
+    });
+
+    });
+  };
 
   scrollerApi();
 
-// Firebase stufffffff
-
+// Firebase Initializations
   var config = {
     apiKey: "AIzaSyDRpGzVh43wHxEAiH-I6commqUWlJe_Cb8",
     authDomain: "lostnfffound.firebaseapp.com",
@@ -172,18 +195,13 @@ $('#contact-human').click(function() {
       FirstName: firstName,
       LastName: lastName,
       CommentBody: comment
-
-    })
-
-
-  })
+    });
+  });
 
   var trashValue;
 
   database.ref().on('value', function(snapshot){
     trashValue = snapshot.numChildren();
     $('#trashcan').text(trashValue);
-  })
-
-
-})
+  });
+});

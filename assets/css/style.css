@@ -198,3 +198,16 @@ footer {
   background-color: black;
   color: white;
 }
+#band-img {
+    background-color: gold;
+    width: 200px;
+    height: 200px;
+    visibility: hidden;
+}
+
+table {
+  height: 300px;
+  overflow-y: scroll;
+  display: block;
+  width: 600px;
+}
