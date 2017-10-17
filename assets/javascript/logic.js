@@ -102,15 +102,11 @@ $(document).on('click', '.sim-div', function(event){
 
         //what happens when there are no upcoming events
         if(!result.length) {
-          
-
+          $('thead').css('visibility','hidden');
+          $('#events-table').append('<p>No upcoming events.</p>')
         }
 
         //limits table to 5 events
-        if(result.length > 5){
-          $('thead').css('visibility','hidden');
-          $('#events-table').append('<p>No upcoming events.</p>')
-        } 
         else if(result.length > 5){
 
           for(var i = 0; i < 5; i++){
