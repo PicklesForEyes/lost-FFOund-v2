@@ -97,6 +97,7 @@ nav > ul > li:hover > a {
   left: 10%;
 }
 
+/*band photos styling*/
 #dump {
   z-index: -5;
   position: relative;
@@ -105,8 +106,43 @@ nav > ul > li:hover > a {
   opacity: .2;
 }
 
-#middle-section {
-  text-align: center;
+/*band search styling*/
+#band-search {
+  display: none;
+  text-align: left;
+}
+#empty-bandsearch {
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+}
+#empty-p {
+  font-size: 1.8rem;
+  color: #653308;
+  z-index: 20;
+  position: absolute;
+  left: 48%;
+  top: 20%;
+}
+#band-img {
+  width: 200px;
+  height: 200px;
+  visibility: hidden;
+  border-radius: 10px;
+}
+#top-section {
+  font-family: arial;
+}
+#band-name {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #ba9869;
+}
+#band-bio {
+  width: 100%;
+  padding: 10px;
+  background-color: #ba9869;
+  border-radius: 10px;
 }
 
 table {
@@ -128,10 +164,12 @@ table {
 .sim-div {
   display: inline-block;
 }
-
-#band-search {
-  display: none;
+#empty-bandsearch {
+  color: #fecbc9;
+  font-size: 3rem;
 }
+
+/*contact form*/
 #human-contact {
   display: none;
   background-color: #fecb9c;
@@ -156,14 +194,7 @@ table {
 }
 
 footer {
-  display: none;
+  /*display: none;*/
   background-color: black;
   color: white;
-}
-
-#band-img {
-    background-color: gold;
-    width: 200px;
-    height: 200px;
-    visibility: hidden;
 }

@@ -5,9 +5,9 @@
 	<title></title>
 	<meta name="viewport" initial-scale="1">
 	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="assets/slick-1.8.0/slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="assets/slick-1.8.0/slick/slick-theme.css" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel=stylesheet type="text/css" href="assets/css/reset.css">
 	<link rel=stylesheet type="text/css" href="assets/css/style.css">
 </head>
@@ -47,14 +47,21 @@
 	</div>
 
 	<!-- begin BandSearch -->
-	<div id='band-search'>
-		<main>
-			<h1 id="band-name"></h1>
-			<section id='top-section' class='row'>
-				<div class='col-sm-5'>
+	<main>
+		<div id='band-search' class='container'>
+			<!--empty bandsearch page-->
+			<div id='empty-bandsearch'>
+				<p id='empty-p'>enter a band to get started</p>
+				<img src='assets/img/pandaarrow.png' />
+			</div>
+			<div class='row'>
+				<h1 id="band-name" class='col-xs-12'></h1>
+			</div>
+			<section id='top-section' class='row align-items-center justify-content-center'>
+				<div class='col-sm-3'>
 					<img id='band-img' src="#" />
 				</div>
-				<article class='col-sm-7'>
+				<article class='col-sm-9'>
 					<p id="band-bio"></p>
 				</article>
 			</section>
@@ -85,7 +92,7 @@
 					<a href="#"></a>
 				</aside>
 			</section>
-		</main>
+	</main>
 	</div>
 	<!-- end Band Search -->
 

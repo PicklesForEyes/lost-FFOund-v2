@@ -26,17 +26,14 @@ $('#contact-human').click(function() {
   $('#human-contact').fadeIn();
 });
 
-$('.slick-slide').imagesLoaded(function() {
-  $('#footer').show();
-});
-
   var keyWord = '';
 
   $(document).on('keydown', function(event){
     if (event.which === 13){
       event.preventDefault();
       keyWord = $('.submit').val().trim();
-      fadingOut();  
+      $('#empty-bandsearch').css('display', 'none');
+      fadingOut();
 
       if(keyWord.length > 0){
         drawArtist();
@@ -97,9 +94,9 @@ $('.slick-slide').imagesLoaded(function() {
           for(var i = 0; i < 5; i++){
 
             $('#events-table').append(
-              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') + 
-              '</td><td>' + result[i].venue.name + 
-              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country + 
+              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') +
+              '</td><td>' + result[i].venue.name +
+              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country +
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
@@ -107,9 +104,9 @@ $('.slick-slide').imagesLoaded(function() {
           for(var i = 0; i < result.length; i++){
 
             $('#events-table').append(
-              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') + 
-              '</td><td>' + result[i].venue.name + 
-              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country + 
+              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') +
+              '</td><td>' + result[i].venue.name +
+              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country +
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
@@ -180,7 +177,7 @@ $('.slick-slide').imagesLoaded(function() {
 
 
   })
-  
+
   var trashValue;
 
   database.ref().on('value', function(snapshot){
