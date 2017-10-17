@@ -97,6 +97,7 @@ $(document).on('click', '.sim-div', function(event){
         url: bandsURL,
         method: 'GET'
       }).done(function(result){
+
         // console.log(result);
 
         //what happens when there are no upcoming events
@@ -107,6 +108,10 @@ $(document).on('click', '.sim-div', function(event){
 
         //limits table to 5 events
         if(result.length > 5){
+          $('thead').css('visibility','hidden');
+          $('#events-table').append('<p>No upcoming events.</p>')
+        } 
+        else if(result.length > 5){
 
           for(var i = 0; i < 5; i++){
 
