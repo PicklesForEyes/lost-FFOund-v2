@@ -168,12 +168,11 @@ $(document).on('click', '.sim-div', function(event){
     });
 
     });
-  }
+  };
 
   scrollerApi();
 
-// Firebase stufffffff
-
+// Firebase Initializations
   var config = {
     apiKey: "AIzaSyDRpGzVh43wHxEAiH-I6commqUWlJe_Cb8",
     authDomain: "lostnfffound.firebaseapp.com",
@@ -197,18 +196,13 @@ $(document).on('click', '.sim-div', function(event){
       FirstName: firstName,
       LastName: lastName,
       CommentBody: comment
-
-    })
-
-
-  })
+    });
+  });
   
   var trashValue;
 
   database.ref().on('value', function(snapshot){
     trashValue = snapshot.numChildren();
     $('#trashcan').text(trashValue);
-  })
-
-
-})
+  });
+});
