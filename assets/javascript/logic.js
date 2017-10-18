@@ -11,6 +11,13 @@ function fadingOut () {
     $('#band-search').fadeIn();
 }
   $('#band-search-button').click(function() {
+    if ($('#band-bio').is(':empty')) {
+      $('#empty-bandsearch').show();
+      $('#band-data').hide();
+    } else {
+      $('#empty-bandsearch').hide();
+      $('#band-data').show();
+    }
     fadingOut();
   });
 
@@ -36,7 +43,7 @@ $(document).on('keydown', function(event){
   if (event.which === 13){
     event.preventDefault();
     keyWord = $('.submit').val().trim();
-      
+
     if(keyWord.length > 0){
       fadingOut();
       drawArtist();
@@ -68,6 +75,18 @@ $(document).on('click', '.sim-div', function(event){
     }).done(function(result){
       // console.log(result);
 
+      // hide panda
+      $('#empty-bandsearch').hide();
+      $('#band-data').show();
+
+      //handle error from ajax
+      if (result.error) {
+        console.log ('this is the error: ', result.message);
+        $('#band-data').hide();
+        $('#error').text(result.message);
+        $('#empty-bandsearch').show();
+      }
+
       // populate page with last.fm info
       $('#band-name').text(result.artist.name);
       $('#band-bio').html(result.artist.bio.summary)
@@ -95,7 +114,7 @@ $(document).on('click', '.sim-div', function(event){
       //Bandsintown call
       $.ajax({
         url: bandsURL,
-        method: 'GET'
+        method: 'GET',
       }).done(function(result){
 
         // console.log(result);
@@ -111,9 +130,9 @@ $(document).on('click', '.sim-div', function(event){
 
           for(var i = 0; i < result.length; i++){
             $('#events-table').append(
-              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') + 
-              '</td><td>' + result[i].venue.name + 
-              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country + 
+              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') +
+              '</td><td>' + result[i].venue.name +
+              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country +
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
@@ -124,9 +143,9 @@ $(document).on('click', '.sim-div', function(event){
           for(var i = 0; i < result.length; i++){
 
             $('#events-table').append(
-              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') + 
-              '</td><td>' + result[i].venue.name + 
-              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country + 
+              '<tr><td>' + moment(result[i].datetime).format('MMM Do, YYYY h:mma') +
+              '</td><td>' + result[i].venue.name +
+              '</td><td>' + result[i].venue.city + ', ' + result[i].venue.region + ', ' + result[i].venue.country +
               '</td><td><a target="_blank" href=' + result[i].offers[0].url + '>' + "Get Tickets!" + '</a></td></tr>'
               );
           }
@@ -197,7 +216,7 @@ $(document).on('click', '.sim-div', function(event){
       CommentBody: comment
     });
   });
-  
+
   var trashValue;
 
   database.ref().on('value', function(snapshot){
