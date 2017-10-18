@@ -245,6 +245,14 @@ footer {
   max-width: 300px;
   font-size: 1rem;
   left: 5%;
+  }
 }
+
+.error-show{
+  border: 2px solid red;
+}
+
+.error{
+  display: none;
 }
 
