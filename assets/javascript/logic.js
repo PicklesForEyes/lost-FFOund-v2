@@ -11,6 +11,13 @@ function fadingOut () {
     $('#band-search').fadeIn();
 }
   $('#band-search-button').click(function() {
+    if ($('#band-bio').is(':empty')) {
+      $('#empty-bandsearch').show();
+      $('#band-data').hide();
+    } else {
+      $('#empty-bandsearch').hide();
+      $('#band-data').show();
+    }
     fadingOut();
   });
 
@@ -67,6 +74,17 @@ $(document).on('click', '.sim-div', function(event){
       method: 'GET'
     }).done(function(result){
       // console.log(result);
+      // hide panda
+      $('#empty-bandsearch').hide();
+      $('#band-data').show();
+
+      //handle error from ajax
+      if (result.error) {
+        console.log ('this is the error: ', result.message);
+        $('#band-data').hide();
+        $('#error').text(result.message);
+        $('#empty-bandsearch').show();
+      }
 
       // populate page with last.fm info
       $('#band-name').text(result.artist.name);
@@ -95,7 +113,7 @@ $(document).on('click', '.sim-div', function(event){
       //Bandsintown call
       $.ajax({
         url: bandsURL,
-        method: 'GET'
+        method: 'GET',
       }).done(function(result){
 
         // console.log(result);
