@@ -23,6 +23,7 @@ function fadingOut () {
       $('#empty-bandsearch').hide();
       $('#band-data').show();
     }
+    fadingOut();
   });
 
 $('#home').click(function() {
