@@ -3,6 +3,9 @@ $(document).ready(function(){
 //Global Var
 var keyWord = '';
 var trashValue;
+var inputFirstClear = false;
+var inputLastClear = false;
+var inputSubjectClear = false;
 
 // Page transitions
 function fadingOut () {
@@ -214,34 +217,45 @@ $(document).on('click', '.sim-div', function(event){
     var firstName = inputFirst.val().trim();
     var lastName = inputLast.val().trim();
     var comment = inputSubject.val().trim();
+    var inputFirstClear = inputFirst.hasClass('error-show');
+
+    console.log(inputFirstClear)
 
     if(firstName.length < 2){
       inputFirst.addClass('error-show');
       inputFirst.closest('div').children('.error').css('display','block');
+      inputFirstClear = false
     }
     else {
       inputFirst.removeClass('error-show');
+      inputFirst.closest('div').children('.error').css('display','none');
+      inputFirstClear = true;
     }
 
     if(lastName.length < 2){
       inputLast.addClass('error-show');
       inputLast.closest('div').children('.error').css('display','block');
+      inputLastClear = false;
     }
     else {
       inputLast.removeClass('error-show');
+      inputLast.closest('div').children('.error').css('display','none');
+      inputLastClear = true;
     }
 
-    if(comment.length < 5 || comment.length > 160){
+    if(comment.length < 5){
       inputSubject.addClass('error-show');
       inputSubject.closest('div').children('.error').css('display','block');
+      inputSubjectClear = false;
     }
     else {
       inputSubject.removeClass('error-show');
+      inputSubject.closest('div').children('.error').css('display','none');
+      inputSubjectClear = true;
     }
 
-    console.log(inputFirst.closest().children())
 
-    if(!(inputFirst || inputLast || inputSubject).hasClass('error-show')) {
+    if(inputFirstClear && inputLastClear && inputSubjectClear) {
       database.ref().push({
         FirstName: firstName,
         LastName: lastName,
