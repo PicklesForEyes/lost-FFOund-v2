@@ -74,6 +74,7 @@ $(document).on('click', '.sim-div', function(event){
       method: 'GET'
     }).done(function(result){
       // console.log(result);
+
       // hide panda
       $('#empty-bandsearch').hide();
       $('#band-data').show();
@@ -172,7 +173,7 @@ $(document).on('click', '.sim-div', function(event){
         $('#dump').append(trending);
       }
 
-    //slick settings
+    //slick settings 
     $('#dump').slick({
       dots: false,
       infinite: true,

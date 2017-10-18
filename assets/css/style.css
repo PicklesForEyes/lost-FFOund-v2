@@ -234,7 +234,6 @@ footer {
   color: white;
 }
 
-
 /*media queries for responsive design*/
 @media only screen and (max-width: 1090px) {
   #bunny p, #duck p {
@@ -248,3 +247,4 @@ footer {
   left: 5%;
 }
 }
+
